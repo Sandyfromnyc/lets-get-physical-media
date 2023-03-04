@@ -3,9 +3,9 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Tape
+from .models import Tape, Movie
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 
@@ -71,3 +71,11 @@ class TapeUpdate(LoginRequiredMixin, UpdateView):
 class TapeDelete(LoginRequiredMixin, DeleteView):
   model = Tape
   success_url ='/tapes'
+
+
+class MovieList(LoginRequiredMixin, ListView):
+  model = Movie
+  
+
+class MovieDetail(LoginRequiredMixin, DetailView):
+  model = Movie

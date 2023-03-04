@@ -22,8 +22,9 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <!-- other links go here  -->
                     {% if user.is_authenticated %}
+                        <li><a href="{% url 'movies_index' %}">Movies</a></li>
                         <li><a href="{% url 'index' %}">My Tapes</a></li>
-                        <li><a href="{% url 'tape_create' %}">Add Tape</a></li>
+                        <li><a href="{% url 'tapes_create' %}">Add Tape</a></li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
                         <li><a href="{% url 'signup' %}">Sign Up</a></li>
