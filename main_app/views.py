@@ -47,11 +47,14 @@ def tapes_index(request):
 
 class TapeCreate(LoginRequiredMixin, CreateView):
   model = Tape
-  fields = '__all__'
+  fields = ['name', 'quantity', 'quality']
 
   def form_valid(self, form):
     form.instance.user = self.request.user 
-    return super().form_valid(form)
+    return redirect('index')
 
-def tapes_detail(request):
-  pass
+def tapes_detail(request, tape_id):
+  tape = Tape.objects.get(id=tape_id)
+  return render(request, 'tapes/detail.html', {
+    'tape': tape, 
+  })
