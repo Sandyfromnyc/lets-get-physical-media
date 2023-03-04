@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>VHS Shelves</h1>
+
+{% for tape in tapes %} 
+  <a href="{% url 'detail' tape.id %}">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ tape.name }}</span>
+        <p>Quantity: {{ tape.quantity }}</p>
+        <p>Quality: {{ tape.quality }}</p>
+        {% for movie in tape.movies.all %}
+        <p>Director: {{ movie.director }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </a>
+{% endfor %}
+{% endblock %}
