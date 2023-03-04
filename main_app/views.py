@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .models import Tape
 
 # Create your views here.
 
@@ -29,7 +29,16 @@ def signup(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+  return render(request, 'home.html')
+
 
 def about(request):
-    return render(request, 'about.html')
+  return render(request, 'about.html')
+
+
+def tapes_index(request):
+  tapes = Tape.objects.filter(user=request.user)
+  return render(request, 'tapes/index.html', {
+    'tapes': tapes
+  })
+
