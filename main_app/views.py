@@ -97,3 +97,13 @@ class MovieCreate(LoginRequiredMixin, CreateView):
   model = Movie
   fields = '__all__'
   success_url ='/movies'
+
+@login_required
+def assoc_movie(request, tape_id, movie_id):
+  Tape.objects.get(id=tape_id).movies.add(movie_id)
+  return redirect('detail', tape_id=tape_id)
+
+@login_required
+def unassoc_movie(request, tape_id, movie_id):
+  Tape.objects.get(id=tape_id).movies.remove(movie_id)
+  return redirect('detail', tape_id=tape_id)
