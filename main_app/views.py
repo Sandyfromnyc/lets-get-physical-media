@@ -79,3 +79,17 @@ class MovieList(LoginRequiredMixin, ListView):
 
 class MovieDetail(LoginRequiredMixin, DetailView):
   model = Movie
+
+
+class MovieUpdate(LoginRequiredMixin, UpdateView):
+  model = Movie
+  fields = 'director'
+
+
+class MovieDelete(LoginRequiredMixin, DeleteView):
+  model = Movie
+  success_url = '/movies'
+
+class MovieCreate(LoginRequiredMixin, CreateView):
+  model = Movie
+  fields = '__all__'

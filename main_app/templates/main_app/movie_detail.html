@@ -8,10 +8,10 @@
     <div class="card">
       <span class="card-title">{{ movie.title }}</span>
       <p>Directed by: {{ movie.director }}</p>
-    </div>
-    <div class="card-action">
-      <a href="">Edit</a>
-      <a href="">Delete</a>
+      <div class="card-action">
+        <a href="{% url 'movies_update' movie.id %}">Edit</a>
+        <a href="{% url 'movies_delete' movie.id %}">Delete</a>
+      </div>
     </div>
   </div>
 </div>
