@@ -59,6 +59,7 @@ class TapeCreate(LoginRequiredMixin, CreateView):
 
 def tapes_detail(request, tape_id):
   tape = Tape.objects.get(id=tape_id)
+
   return render(request, 'tapes/detail.html', {
     'tape': tape, 
   })
