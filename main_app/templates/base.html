@@ -19,6 +19,7 @@
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Media Collector</a></li>
                 </ul>
                 <ul class="right">
+                    <li><a href="{% url 'about' %}">About</a></li>
                     <!-- other links go here  -->
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
