@@ -10,9 +10,6 @@
         <span class="card-title">{{ tape.name }}</span>
         <p>Quantity: {{ tape.quantity }}</p>
         <p>Quality: {{ tape.quality }}</p>
-        
-        <p>Director: {{ tape.movie.director }}</p>
-      
       </div>
       <div class="card-action">
         <a href="{% url 'tapes_update' tape.id %}">Edit</a>
@@ -20,6 +17,16 @@
       </div>
     </div>
   </div>
+  <div class="col s6">
+    {% for movie in movies.all %}
+    <div class="card">
+      <div class="card-content">
+    <p>Title: {{ movie.title }}</p>
+    <p>Director: {{ movie.director }}</p>
+  </div>
+</div>
+{% endfor %}
+</div>
 </div>
 
 

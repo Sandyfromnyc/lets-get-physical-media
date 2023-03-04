@@ -37,7 +37,7 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
-
+@login_required
 def tapes_index(request):
   tapes = Tape.objects.filter(user=request.user)
   return render(request, 'tapes/index.html', {
@@ -57,11 +57,13 @@ class TapeCreate(LoginRequiredMixin, CreateView):
     # it was causing and error though 
     # return redirect('index')
 
+@login_required
 def tapes_detail(request, tape_id):
   tape = Tape.objects.get(id=tape_id)
-
+  id_list = tape.movies.all().values_list('id')
+  movies_tape_doesnt_have = Movie.objects.exclude(id__in=id_list)
   return render(request, 'tapes/detail.html', {
-    'tape': tape, 
+    'tape': tape, 'movies' : movies_tape_doesnt_have
   })
 
 class TapeUpdate(LoginRequiredMixin, UpdateView):
@@ -84,7 +86,7 @@ class MovieDetail(LoginRequiredMixin, DetailView):
 
 class MovieUpdate(LoginRequiredMixin, UpdateView):
   model = Movie
-  fields = 'director'
+  fields = '__all__'
 
 
 class MovieDelete(LoginRequiredMixin, DeleteView):
@@ -94,3 +96,4 @@ class MovieDelete(LoginRequiredMixin, DeleteView):
 class MovieCreate(LoginRequiredMixin, CreateView):
   model = Movie
   fields = '__all__'
+  success_url ='/movies'

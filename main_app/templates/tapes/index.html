@@ -10,6 +10,9 @@
         <span class="card-title">{{ tape.name }}</span>
         <p>Quantity: {{ tape.quantity }}</p>
         <p>Quality: {{ tape.quality }}</p>
+        {% for movie in tape.movies.all %}
+        <p>Director: {{ movie.director }}</p>
+        {% endfor %}
       </div>
     </div>
   </a>
