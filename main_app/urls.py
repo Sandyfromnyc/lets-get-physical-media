@@ -6,6 +6,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('accounts/signup/', views.signup, name='signup'),
     path('tapes/', views.tapes_index, name='index'),
-
+    path('tapes/create/', views.TapeCreate.as_view(), name="tape_create"),
 ]
 	

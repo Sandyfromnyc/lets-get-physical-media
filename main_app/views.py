@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Tape
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 
@@ -42,3 +43,12 @@ def tapes_index(request):
     'tapes': tapes
   })
 
+
+
+class TapeCreate(LoginRequiredMixin, CreateView):
+  model = Tape
+  fields = '__all__'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user 
+    return super().form_valid(form)
