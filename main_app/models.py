@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 # Create your models here.
+class Movie(models.Model):
+  title = models.CharField(max_length=100)
+  director = models.CharField(max_length=100)
+
 
 class Tape(models.Model):
   name = models.CharField(max_length=100)
