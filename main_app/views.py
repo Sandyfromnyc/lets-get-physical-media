@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Tape
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 # Create your views here.
 
@@ -51,10 +52,22 @@ class TapeCreate(LoginRequiredMixin, CreateView):
 
   def form_valid(self, form):
     form.instance.user = self.request.user 
-    return redirect('index')
+    # Edward: this needs to eventually be
+    return super().form_valid(form)
+    # it was causing and error though 
+    # return redirect('index')
 
 def tapes_detail(request, tape_id):
   tape = Tape.objects.get(id=tape_id)
   return render(request, 'tapes/detail.html', {
     'tape': tape, 
   })
+
+class TapeUpdate(LoginRequiredMixin, UpdateView):
+  model = Tape
+  fields = ['quantity', 'quality']
+
+
+class TapeDelete(LoginRequiredMixin, DeleteView):
+  model = Tape
+  success_url ='/tapes'

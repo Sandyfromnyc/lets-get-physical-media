@@ -130,7 +130,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 #need to change this from slash to /tapes/ eventually
-LOGIN_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL='/tapes/'
 # this can stay the same
 LOGOUT_REDIRECT_URL='/'
 # Default primary key field type

@@ -2,7 +2,25 @@
 {% block content %}
 
 <h1>{{ tape.name }}'s Details</h1>
-<p>Quantity: {{ tape.quantity }}</p>
-<p>Quality: {{ tape.quality }}</p>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ tape.name }}</span>
+        <p>Quantity: {{ tape.quantity }}</p>
+        <p>Quality: {{ tape.quality }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'tapes_update' tape.id %}">Edit</a>
+        <a href="{% url 'tapes_delete' tape.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 {% endblock %}
