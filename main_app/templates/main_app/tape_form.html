@@ -11,7 +11,7 @@
 
 <form action="{% url 'search_movies' %}" method="POST">
   <div class="row">
-    <button class="btn indigo amber-text accent-4">Search</button>
+    <button class="btn indigo amber-text accent-4 col s2">Search</button>
     <div class="input-field input-field col s6">
       {% csrf_token %}
         <input type="search" placeholder="Search" name="searched">
