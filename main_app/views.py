@@ -125,8 +125,8 @@ def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
     movies = Movie.objects.filter(title__contains=searched)
-    return redirect(request, 'movies_create', {'searched': searched, 'movies': movies})
+    return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
   else:
-    return redirect(request, 'movies_create', {})
-
+    return render(request, 'search_movies.html', {})
+ 
 
