@@ -5,16 +5,16 @@
 {% if object %}
   <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
 {% else %}
-<h1>Add A Tape to the Shelf</h1>
+<h1 class="center">Add A Tape to the Shelf</h1>
+<br>
 <!-- heres the search -->
 
 
 <form action="{% url 'search_movies' %}" method="POST">
   <div class="row">
-    <button class="btn indigo amber-text accent-4 col s2">Search</button>
-    <div class="input-field input-field col s6">
+    <button class="btn-small indigo amber-text accent-4">Search</button>
       {% csrf_token %}
-        <input type="search" placeholder="Search" name="searched">
+        <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched">
     </div>
   </div>
 </form>
