@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Tape, Movie
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+import requests
 
 # Create your views here.
 
@@ -121,17 +122,30 @@ def search_media(request):
     return render(request, 'search_media.html', {})
 
 
+# def search_movies(request):
+#   if request.method == 'POST':
+#     searched = request.POST['searched']
+#     movies = Movie.objects.filter(title__contains=searched)
+#     # this works as the serach but we need to figure out how to generate a tap from it
+#    # return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
+#     # return redirect(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+#     return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+#   else:
+#     # return render(request, 'search_movies.htm', {})
+#     # return redirect(request, 'main_app/tape_form.html', {})
+#     return render(request, 'main_app/tape_form.html', {})
+
+
+# def movies(request):
+#   search = {"s": "Star Wars"}
+#   response=requests.get("http://www.omdbapi.com/?apikey=acd8ae1a&", params=search).json()
+#   return render(request, "movies.html", {"response":response})
+
 def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
-    movies = Movie.objects.filter(title__contains=searched)
-    # this works as the serach but we need to figure out how to generate a tap from it
-   # return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
-    # return redirect(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+    params = {'t': f'{searched}'}
+    response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'response': response})
   else:
-    # return render(request, 'search_movies.htm', {})
-    # return redirect(request, 'main_app/tape_form.html', {})
     return render(request, 'main_app/tape_form.html', {})
- 
-
