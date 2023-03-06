@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Let's Get Physical Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
@@ -27,15 +28,14 @@
                         <li><a href="{% url 'index' %}" class="amber-text accent-3">My Tapes</a></li>
                         <li><a href="{% url 'tapes_create' %}" class="amber-text accent-3">Add Tape</a></li>
                         <li><a href="{% url 'logout' %}" class="amber-text accent-3">Log Out</a></li>
-                        <li>
-                            <form action="{% url 'search_media' %}" method="POST">
+                            <li>
+                                <form action="{% url 'search_media' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="search" placeholder="Search" name="searched">
-                             </li>
-                             <li>
-                                <button class="btn amber indigo-text accent-4">Search</button>
-                            </form>
-                        </li>
+                            </li>
+                            <li><a href="{% url 'search_media' %}"><i class="material-icons amber-text accent-3">search</i></a></li> 
+                                </form>
+                            </li>
                     {% else %}
                         <li><a href="{% url 'signup' %}" class="amber-text accent-3">Sign Up</a></li>
                         <li><a href="{% url 'login' %}" class="amber-text accent-3">Log In</a></li>
