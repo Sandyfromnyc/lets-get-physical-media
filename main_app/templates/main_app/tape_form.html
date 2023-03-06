@@ -10,14 +10,16 @@
 
 
 <form action="{% url 'search_movies' %}" method="POST">
-  {% csrf_token %}
-  <input type="search" placeholder="Search" name="searched">
-</li>
-<li>
-  <button class="btn amber indigo-text accent-4">Search</button>
+  <div class="row">
+    <button class="btn indigo amber-text accent-4">Search</button>
+    <div class="input-field input-field col s6">
+      {% csrf_token %}
+        <input type="search" placeholder="Search" name="searched">
+    </div>
+  </div>
 </form>
 
-<!-- above is the search and below is the creation form -->
+<!-- above is the search  -->
 
 <form action="" method="POST">
   {% csrf_token %}
@@ -27,5 +29,5 @@
   <input type="submit" value="Submit" class="btn indigo amber-text accent-4">
 </form>
 
-<!-- {% endif %} -->
+{% endif %}
 {% endblock %}

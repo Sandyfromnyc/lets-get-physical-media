@@ -116,17 +116,17 @@ def search_media(request):
     movies = Movie.objects.filter(title__contains=searched)
     # moviesD = Movie.objects.filter(director__contains=searched)
     tapes = Tape.objects.filter(name__contains=searched)
-    return redirect(request, '', {'searched': searched, 'movies': movies, 'tapes': tapes})
+    return render(request, 'search_media.html', {'searched': searched, 'movies': movies, 'tapes': tapes})
   else:
-    return redirect(request, 'search_media.html', {})
+    return render(request, 'search_media.html', {})
 
 
 def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
     movies = Movie.objects.filter(title__contains=searched)
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+    return redirect(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
   else:
-    return render(request, 'main_app/tape_form.html', {})
+    return redirect(request, 'main_app/tape_form.html', {})
  
 
