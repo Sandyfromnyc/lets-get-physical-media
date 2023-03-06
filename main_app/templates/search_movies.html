@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if searched %}
+    <h1>You Searched For {{ searched }}</h1>
+    <br>
+<div class="row">
+{% for movie in movies %}
+    <div class="col s6">
+        <a href="{% url 'movies_detail' movie.id %}" text-decoration="none">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">{{ movie.title }}</span>
+                    <p>Director: {{ movie.director }}</p>
+                </div>
+            </div>
+        </a>  
+ </div>
+{% endfor%}
+</div>
+{% else %}
+
+  <h1>You need to search first!</h1>
+
+{% endif %}
+{% endblock %}

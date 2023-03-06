@@ -5,8 +5,35 @@
 {% if object %}
   <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
 {% else %}
-<h1>Add A Tape to the Shelf</h1>
+<h1 class="center">Add A Tape to the Shelf</h1>
+<br>
+<!-- heres the search -->
+
+
+<form action="{% url 'search_movies' %}" method="POST">
+  <div class="row">
+    <button class="btn-small indigo amber-text accent-4">Search</button>
+      {% csrf_token %}
+        <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched">
+    </div>
+  </div>
+</form>
+
+<!-- above is the search  -->
+
+<!-- search results below here  -->
+{% if searched %}
+    <h6>You Searched For {{ searched }}:</h6>
+{% for movie in movies %}
+  <ul>
+    <a href="{% url 'movies_detail' movie.id %}" text-decoration="none">
+      <li>{{ movie.title }} Directed by: {{ movie.director }}</li>
+    </a>
+  </ul>  
+{% endfor%}
 {% endif %}
+<!-- search results above here  -->
+
 <form action="" method="POST">
   {% csrf_token %}
   <table>
@@ -15,5 +42,5 @@
   <input type="submit" value="Submit" class="btn indigo amber-text accent-4">
 </form>
 
-
+{% endif %}
 {% endblock %}

@@ -14,11 +14,11 @@
 <body>
     <header class="navbar-fixed">
         <nav>
-            <div class="nav-wrapper  indigo">
+            <div class="nav-wrapper indigo">
                 <ul>
-                    <li><a href="{% url 'home' %}" class="left brand-logo amber-text accent-3">&nbsp;&nbsp;Media Collector</a></li>
+                    <li><a href="{% url 'home' %}" class="left brand-logo amber-text accent-3">&nbsp;&nbsp;LGP...M</a></li>
                 </ul>
-                <ul class="right">
+                <ul class="right side-nave">
                     <li><a href="{% url 'about' %}" class="amber-text accent-3">About</a></li>
                     <!-- other links go here  -->
                     {% if user.is_authenticated %}
@@ -27,11 +27,19 @@
                         <li><a href="{% url 'index' %}" class="amber-text accent-3">My Tapes</a></li>
                         <li><a href="{% url 'tapes_create' %}" class="amber-text accent-3">Add Tape</a></li>
                         <li><a href="{% url 'logout' %}" class="amber-text accent-3">Log Out</a></li>
+                        <li>
+                            <form action="{% url 'search_media' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="search" placeholder="Search" name="searched">
+                             </li>
+                             <li>
+                                <button class="btn amber indigo-text accent-4">Search</button>
+                            </form>
+                        </li>
                     {% else %}
                         <li><a href="{% url 'signup' %}" class="amber-text accent-3">Sign Up</a></li>
                         <li><a href="{% url 'login' %}" class="amber-text accent-3">Log In</a></li>
                     {% endif %}
-                    
                 </ul>
             </div>
         </nav>

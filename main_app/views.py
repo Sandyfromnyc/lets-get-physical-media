@@ -107,3 +107,31 @@ def assoc_movie(request, tape_id, movie_id):
 def unassoc_movie(request, tape_id, movie_id):
   Tape.objects.get(id=tape_id).movies.remove(movie_id)
   return redirect('detail', tape_id=tape_id)
+
+
+@login_required
+def search_media(request):
+  if request.method == 'POST':
+    searched = request.POST['searched']
+    movies = Movie.objects.filter(title__contains=searched)
+    # moviesD = Movie.objects.filter(director__contains=searched)
+    tapes = Tape.objects.filter(name__contains=searched)
+    return render(request, 'search_media.html', {'searched': searched, 'movies': movies, 'tapes': tapes})
+  else:
+    return render(request, 'search_media.html', {})
+
+
+def search_movies(request):
+  if request.method == 'POST':
+    searched = request.POST['searched']
+    movies = Movie.objects.filter(title__contains=searched)
+    # this works as the serach but we need to figure out how to generate a tap from it
+   # return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
+    # return redirect(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+  else:
+    # return render(request, 'search_movies.htm', {})
+    # return redirect(request, 'main_app/tape_form.html', {})
+    return render(request, 'main_app/tape_form.html', {})
+ 
+
