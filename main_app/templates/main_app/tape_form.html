@@ -21,6 +21,19 @@
 
 <!-- above is the search  -->
 
+<!-- search results below here  -->
+{% if searched %}
+    <h6>You Searched For {{ searched }}:</h6>
+{% for movie in movies %}
+  <ul>
+    <a href="{% url 'movies_detail' movie.id %}" text-decoration="none">
+      <li>{{ movie.title }} Directed by: {{ movie.director }}</li>
+    </a>
+  </ul>  
+{% endfor%}
+{% endif %}
+<!-- search results above here  -->
+
 <form action="" method="POST">
   {% csrf_token %}
   <table>

@@ -125,11 +125,13 @@ def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
     movies = Movie.objects.filter(title__contains=searched)
-    # this works as the serach but need to figure out how to generate a tap from it
-    return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
+    # this works as the serach but we need to figure out how to generate a tap from it
+   # return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
     # return redirect(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
-    # return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
   else:
+    # return render(request, 'search_movies.htm', {})
+    # return redirect(request, 'main_app/tape_form.html', {})
     return render(request, 'main_app/tape_form.html', {})
  
 
