@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if searched %}
+  <h1>You Searched For "{{ searched }}"</h1>
+  <br>
+  {% for movie in movies %}
+  <div class="row">
+    <div class="col s6">
+        <a href="{% url 'detail' movie.id %}" text-decoration="none">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">{{ movie.title }}</span>
+                    <p>Director: {{ movie.director }}</p>
+                </div>
+            </div>
+        </a>  
+    </div>
+  {% endfor%}
+  </div>
+  {% for tape in tapes %}
+  <div class="row">
+      <a href="{% url 'tapes_detail' tape.id %}" text-decoration="none">
+          <div class="col s6">
+              <div class="card">
+                  <div class="card-content">
+                      <span class="card-title">{{ tape.name }}</span>
+                      <p>Quantity: {{ tape.quantity }}</p>
+                      <p>Quality: {{ tape.quality }}</p>
+                  </div>
+              </div>
+          </div>
+      </a>
+  {% endfor %}
+  </div>
+{% else %}
+
+  <h1>You need to search first!</h1>
+
+{% endif %}
+{% endblock %}
