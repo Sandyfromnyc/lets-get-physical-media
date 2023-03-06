@@ -18,5 +18,6 @@ urlpatterns = [
     path('movies/<int:pk>/update', views.MovieUpdate.as_view(), name="movies_update"),
     path('movies/<int:pk>/delete', views.MovieDelete.as_view(), name="movies_delete"),
     path('search_media/', views.search_media, name='search_media'),
+    path('search_movies/', views.search_movies, name='search_movies'),
 ]
 	

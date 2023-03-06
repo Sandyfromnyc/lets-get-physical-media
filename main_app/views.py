@@ -109,7 +109,7 @@ def unassoc_movie(request, tape_id, movie_id):
   return redirect('detail', tape_id=tape_id)
 
 
-
+@login_required
 def search_media(request):
   if request.method == 'POST':
     searched = request.POST['searched']
@@ -119,4 +119,14 @@ def search_media(request):
     return render(request, 'search_media.html', {'searched': searched, 'movies': movies, 'tapes': tapes})
   else:
     return render(request, 'search_media.html', {})
+
+
+def search_movies(request):
+  if request.method == 'POST':
+    searched = request.POST['searched']
+    movies = Movie.objects.filter(title__contains=searched)
+    return redirect(request, 'movies_create', {'searched': searched, 'movies': movies})
+  else:
+    return redirect(request, 'movies_create', {})
+
 

@@ -6,7 +6,25 @@
   <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
 {% else %}
 <h1>Add A Tape to the Shelf</h1>
+<!-- heres the search -->
+
+<div id="container">
+  {% csrf_token %}
+  <form action="{% url 'search_movies' %}"  class="browser-default left" mehtod="POST">
+    <button class="btn indigo amber-text accent-4">Find A Movie</button>
+    <input placeholder="Search Movies" type="search" class="browser-default search-field" name="searched" aria-label="Search box"> 
+  </form>
+</div>   
+
+
+<!-- above is the search  -->
 {% endif %}
+<ul>
+{% for movie in movies %}
+<li>{{ movie.title }} Directed by {{ movie.director }}</li>
+
+{% endfor %}
+</ul>
 <form action="" method="POST">
   {% csrf_token %}
   <table>
