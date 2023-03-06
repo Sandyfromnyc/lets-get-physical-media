@@ -107,3 +107,8 @@ def assoc_movie(request, tape_id, movie_id):
 def unassoc_movie(request, tape_id, movie_id):
   Tape.objects.get(id=tape_id).movies.remove(movie_id)
   return redirect('detail', tape_id=tape_id)
+
+
+@login_required
+def search_media(request):
+  pass
