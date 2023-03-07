@@ -141,13 +141,41 @@ def search_media(request):
 #   response=requests.get("http://www.omdbapi.com/?apikey=acd8ae1a&", params=search).json()
 #   return render(request, "movies.html", {"response":response})
 
+# def search_movies(request):
+#   if request.method == 'POST':
+#     searched = request.POST['searched']
+#     params = {'s': f'{searched}'}
+#     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+#     search_response = response["Search"]
+#     print(search_response)
+#     return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
+#   else:
+#     return render(request, 'main_app/tape_form.html', {})
+  
+
+
+  
+
 def search_movies(request):
+  all_movies = {}
   if request.method == 'POST':
     searched = request.POST['searched']
     params = {'s': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
     search_response = response["Search"]
     print(search_response)
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
+    for i in search_response:
+      movie_data = Movie(
+        title = i['Title'],
+        imdb_id = i['imdbID'],
+      )
+      movie_data.save()
+      all_movies = Movie.objects.all().order_by('-id')
+
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response, 'all_movies': all_movies })
   else:
     return render(request, 'main_app/tape_form.html', {})
+  
+
+
+  

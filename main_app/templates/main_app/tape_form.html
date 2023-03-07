@@ -22,7 +22,7 @@
 <!-- above is the search  -->
 
 <!-- search results below here  -->
-{% if searched %}
+<!-- {% if searched %}
     <h6>You Searched For {{ searched }}:</h6>
     <ul>
       {% for x in search_response %}
@@ -33,9 +33,25 @@
       <br>
       {% endfor %}
     </ul>  
-{% endif %}
+{% endif %} -->
 <!-- search results above here  -->
 
+<!-- Below is where we see the Movie objects  -->
+
+{% if searched %}
+    <h6>You Searched For {{ searched }}:</h6>
+    <ul>
+      {% for x in all_movies %}
+      <li>Title: {{ x.title }}</li>
+      <li>IMDB ID: {{ x.imdb_id }}</li>
+      <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdb_id}}">IMDB</a></li>
+      <br>
+      {% endfor %}
+    </ul>  
+{% endif %}
+
+
+<!-- Above here is the Movie objects  -->
 <form action="" method="POST">
   {% csrf_token %}
   <table>
