@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Tape, Movie
+from .models import Tape, Movie, User
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 import requests
@@ -177,5 +177,9 @@ def search_movies(request):
   
 
 def assoc_tape(request, movie_id):
-  return render(request, 'assoc_tape.html')
+  ref_key = movie_id
+  tape = Tape
+
+  tape.save()
+  return render(request, 'assoc_tape.html', movie_id, tape)
   
