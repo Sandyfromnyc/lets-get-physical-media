@@ -144,8 +144,10 @@ def search_media(request):
 def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
-    params = {'t': f'{searched}'}
+    params = {'s': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'response': response})
+    search_response = response["Search"]
+    print(search_response)
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
   else:
     return render(request, 'main_app/tape_form.html', {})

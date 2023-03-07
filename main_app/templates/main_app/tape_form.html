@@ -25,8 +25,8 @@
 {% if searched %}
     <h6>You Searched For {{ searched }}:</h6>
     <ul>
-      {% for i, j in response.items %}
-      <li>{{i}}: {{j}}</li>
+      {% for x in search_response %}
+      <li>{{x.Title}} <br> {{x.Year}}</li>
       {% endfor %}
     </ul>  
 {% endif %}
