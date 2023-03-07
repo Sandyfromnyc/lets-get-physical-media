@@ -3,11 +3,22 @@
 {% block content %}
 
 {% if object %}
+<!-- below is editing a existing tape  -->
   <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" class="btn indigo amber-text accent-4">
+  </form>
+
 {% else %}
+  <!-- above is editing a existing tape  -->
+
 <h1 class="center">Add A Tape to the Shelf</h1>
 <br>
-<!-- heres the search -->
+<!-- here's the search -->
 
 
 <form action="{% url 'search_movies' %}" method="POST">
@@ -20,25 +31,7 @@
 </form>
 
 <!-- above is the search  -->
-
-<!-- search results below here  -->
-<!-- {% if searched %}
-    <h6>You Searched For {{ searched }}:</h6>
-    <ul>
-      {% for x in search_response %}
-      <li><img src="{{x.Poster}}"></li>
-      <li>Title: {{x.Title}}</li>
-      <li>Year: {{x.Year}}</li>
-      <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdbID}}">IMDB</a></li>
-      <br>
-      {% endfor %}
-    </ul>  
-{% endif %} -->
-<!-- search results above here  -->
-
-<!-- Below is where we see the Movie objects  -->
-
-{% if searched %}
+  {% if searched %}
     <h6>You Searched For {{ searched }}:</h6>
     <ul>
       {% for x in all_movies %}
@@ -51,10 +44,8 @@
 
       <br>
       {% endfor %}
-    </ul>  
-{% endif %}
-
-
+    </ul> 
+  {% else %} 
 <!-- Above here is the Movie objects  -->
 <form action="" method="POST">
   {% csrf_token %}
@@ -63,6 +54,6 @@
   </table>
   <input type="submit" value="Submit" class="btn indigo amber-text accent-4">
 </form>
-
+{% endif %}
 {% endif %}
 {% endblock %}

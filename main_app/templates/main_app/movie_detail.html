@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title center">{{ movie.title }}</span>
-        <p>Directed by: {{ movie.director }}</p>
+        <p>Directed by: {{ movie.imdb_id }}</p>
         <div class="card-action">
           <a href="{% url 'movies_update' movie.id %}">Edit</a>
           <a href="{% url 'movies_delete' movie.id %}">Delete</a>
