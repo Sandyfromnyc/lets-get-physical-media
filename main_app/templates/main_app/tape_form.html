@@ -26,7 +26,11 @@
     <h6>You Searched For {{ searched }}:</h6>
     <ul>
       {% for x in search_response %}
-      <li>{{x.Title}} <br> {{x.Year}}</li>
+      <li><img src="{{x.Poster}}"></li>
+      <li>Title: {{x.Title}}</li>
+      <li>Year: {{x.Year}}</li>
+      <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdbID}}">IMDB</a></li>
+      <br>
       {% endfor %}
     </ul>  
 {% endif %}
