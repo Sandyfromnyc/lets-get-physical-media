@@ -24,13 +24,15 @@
 <!-- search results below here  -->
 {% if searched %}
     <h6>You Searched For {{ searched }}:</h6>
-{% for movie in movies %}
-  <ul>
-    <a href="{% url 'movies_detail' movie.id %}" text-decoration="none">
-      <li>{{ movie.title }} Directed by: {{ movie.director }}</li>
-    </a>
-  </ul>  
-{% endfor%}
+    <ul>
+      {% for x in search_response %}
+      <li><img src="{{x.Poster}}"></li>
+      <li>Title: {{x.Title}}</li>
+      <li>Year: {{x.Year}}</li>
+      <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdbID}}">IMDB</a></li>
+      <br>
+      {% endfor %}
+    </ul>  
 {% endif %}
 <!-- search results above here  -->
 
