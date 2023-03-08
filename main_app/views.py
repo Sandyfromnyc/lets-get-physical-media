@@ -185,5 +185,6 @@ def assoc_tape(request, movie_id):
     user = request.user 
   )
   tape.save()
-  return redirect(request, 'details', { 'movie_id': movie_id })
+  tape_id = tape.id
+  return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id, 'tape': tape, 'tape_id': tape_id })
   
