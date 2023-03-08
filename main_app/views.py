@@ -177,5 +177,13 @@ def search_movies(request):
   
 
 def assoc_tape(request, movie_id):
+  movie = Movie.objects.get(id=movie_id)
+  tape = Tape(
+    name = movie.title,
+    quantity= 1,
+    movie = movie,
+    user = request.user 
+  )
+  tape.save()
   return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id })
   
