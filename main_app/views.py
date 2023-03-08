@@ -185,5 +185,6 @@ def assoc_tape(request, movie_id):
   tape_id = tape.id
   print(tape_id)
   return redirect('detail', tape_id=tape_id)
+  # return redirect('tapes_update', tape_id=tape_id)
   # return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id, 'tape': tape, 'tape_id': tape_id })
   
