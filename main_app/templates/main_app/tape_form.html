@@ -32,18 +32,24 @@
 
 <!-- above is the search  -->
   {% if searched %}
+  <div class="row">
     <h6>You Searched For {{ searched }}:</h6>
-    <ul>
-      {% for x in all_movies %}
-      <a href="{% url 'assoc_tape' x.id %}">
-        <li>Title: {{ x.title }}</li>
-        <li>IMDB ID: {{ x.imdb_id }}</li>
-        <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdb_id}}">IMDB</a></li>
-        <li>Django: {{ x.id }}</li>
-      </a>
+    {% for x in all_movies %}
+    <div class="card col s3">
+      <ul>
+        <a href="{% url 'assoc_tape' x.id %}">
+          <li>Title: {{ x.title }}</li>
+          <li>IMDB ID: {{ x.imdb_id }}</li>
+          <hr>
+          <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdb_id}}">IMDB</a></li>
+          <li>Django: {{ x.id }}</li>
+        </a>
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
 
       <br>
-      {% endfor %}
     </ul> 
   {% else %} 
 <!-- Above here is the Movie objects  -->
