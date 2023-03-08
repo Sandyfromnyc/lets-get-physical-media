@@ -24,34 +24,38 @@
 <form action="{% url 'search_movies' %}" method="POST">
   <div class="row">
     <button class="btn-small indigo amber-text accent-4">Search</button>
-      {% csrf_token %}
-        <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched">
-    </div>
+    {% csrf_token %}
+    <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched">
   </div>
+</div>
 </form>
 
 <!-- above is the search  -->
-  {% if searched %}
-  <div class="row">
-    <h6>You Searched For {{ searched }}:</h6>
-    {% for x in search_response %}
+{% if searched %}
+<div class="row">
+  <h6>You Searched For {{ searched }}:</h6>
+  {% for x in search_response %}
+  <form action="{% url 'assoc_tape' %}" method="POST">
     <div class="card col s3">
       <ul>
-
-          <li>Title: {{ x.Title }}</li>
-          <li>IMDB ID: {{ x.imdbID }}</li>
-          <hr>
-          <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdb_id}}">IMDB</a></li>
-          <!-- <li>Django: {{ x.id }}</li> -->
-
+        <li>Title: {{ x.Title }}</li>
+        <li>IMDB ID: {{ x.imdbID }}</li>
       </ul>
+      {% csrf_token %}
+      <input type="search" class="browser-default" placeholder="{{ x.imdbID }}" name="searched" default="{{ x.imdbID }}">
+      <button class="btn-small indigo amber-text accent-4">Search</button>
     </div>
+  </form>
     {% endfor %}
   </div>
 
       <br>
     </ul> 
   {% else %} 
+
+</div>
+
+
 <!-- Above here is the Movie objects  -->
 <form action="" method="POST">
   {% csrf_token %}
@@ -62,4 +66,14 @@
 </form>
 {% endif %}
 {% endif %}
+<div class="row">
+<div class="card col s6">
+    <ul>
+      <li>Title: {{ imdb_response.Title }}</li>
+      <li>IMDB ID: {{ imdb_response.imdbID }}</li>
+      <li>Director: {{ imdb_response.Director }}</li>
+    </ul>
+  </div>
+</div>
+
 {% endblock %}

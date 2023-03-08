@@ -156,8 +156,9 @@ def assoc_tape(request):
     searched = request.POST['searched']
     params = {'i': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
-    search_response = response["Search"]
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
+    imdb_response = response
+    print(imdb_response)
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'imdb_response': imdb_response})
   else:
     return render(request, 'main_app/tape_form.html', {})
     
