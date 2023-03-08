@@ -61,11 +61,8 @@ class TapeCreate(LoginRequiredMixin, CreateView):
 @login_required
 def tapes_detail(request, tape_id):
   tape = Tape.objects.get(id=tape_id)
-  id_list = tape.movies.all().values_list('id')
-  movies_tape_doesnt_have = Movie.objects.exclude(id__in=id_list)
   return render(request, 'tapes/detail.html', {
-    'tape': tape, 'movies' : movies_tape_doesnt_have
-  })
+    'tape': tape })
 
 class TapeUpdate(LoginRequiredMixin, UpdateView):
   model = Tape
@@ -186,5 +183,7 @@ def assoc_tape(request, movie_id):
   )
   tape.save()
   tape_id = tape.id
-  return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id, 'tape': tape, 'tape_id': tape_id })
+  print(tape_id)
+  return redirect('detail', tape_id=tape_id)
+  # return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id, 'tape': tape, 'tape_id': tape_id })
   
