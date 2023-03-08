@@ -37,13 +37,13 @@
     {% for x in search_response %}
     <div class="card col s3">
       <ul>
-        <a href="{% url 'assoc_tape' x.imdbID%}"
+
           <li>Title: {{ x.Title }}</li>
           <li>IMDB ID: {{ x.imdbID }}</li>
           <hr>
           <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdb_id}}">IMDB</a></li>
           <!-- <li>Django: {{ x.id }}</li> -->
-        </a> 
+
       </ul>
     </div>
     {% endfor %}
