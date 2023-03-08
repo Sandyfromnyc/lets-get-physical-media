@@ -5,14 +5,14 @@ from django.urls import reverse
 # Create your models here.
 class Movie(models.Model):
   title = models.CharField(max_length=100)
-  director = models.CharField(max_length=100)
+  imdb_id = models.CharField(max_length=100)
 
 
 class Tape(models.Model):
   name = models.CharField(max_length=100)
   quantity = models.IntegerField()
   quality = models.CharField(max_length=100)
-  movies = models.ManyToManyField(Movie)
+  movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):

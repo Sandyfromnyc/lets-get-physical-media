@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Tape, Movie
+from .models import Tape, Movie, User
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 import requests
@@ -61,11 +61,8 @@ class TapeCreate(LoginRequiredMixin, CreateView):
 @login_required
 def tapes_detail(request, tape_id):
   tape = Tape.objects.get(id=tape_id)
-  id_list = tape.movies.all().values_list('id')
-  movies_tape_doesnt_have = Movie.objects.exclude(id__in=id_list)
   return render(request, 'tapes/detail.html', {
-    'tape': tape, 'movies' : movies_tape_doesnt_have
-  })
+    'tape': tape })
 
 class TapeUpdate(LoginRequiredMixin, UpdateView):
   model = Tape
@@ -141,13 +138,54 @@ def search_media(request):
 #   response=requests.get("http://www.omdbapi.com/?apikey=acd8ae1a&", params=search).json()
 #   return render(request, "movies.html", {"response":response})
 
+# def search_movies(request):
+#   if request.method == 'POST':
+#     searched = request.POST['searched']
+#     params = {'s': f'{searched}'}
+#     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+#     search_response = response["Search"]
+#     print(search_response)
+#     return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
+#   else:
+#     return render(request, 'main_app/tape_form.html', {})
+  
+
+
+  
+
 def search_movies(request):
+  all_movies = {}
   if request.method == 'POST':
     searched = request.POST['searched']
     params = {'s': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
     search_response = response["Search"]
-    print(search_response)
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
+    for i in search_response:
+      movie_data = Movie(
+        title = i['Title'],
+        imdb_id = i['imdbID'],
+      )
+      movie_data.save()
+      all_movies = Movie.objects.all().order_by('-id')
+
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response, 'all_movies': all_movies })
   else:
     return render(request, 'main_app/tape_form.html', {})
+  
+
+def assoc_tape(request, movie_id):
+  movie = Movie.objects.get(id=movie_id)
+  tape = Tape(
+    name = movie.title,
+    quantity= 1,
+    movie = movie,
+    user = request.user 
+  )
+  tape.save()
+  tape_id = tape.id
+  print(tape_id)
+  return redirect('detail', tape_id=tape_id)
+  # return redirect('tapes_update', tape_id=tape_id)
+  # return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id, 'tape': tape, 'tape_id': tape_id })
+  #
+  #
