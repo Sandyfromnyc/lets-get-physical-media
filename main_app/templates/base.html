@@ -4,52 +4,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Let's Get Physical Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header class="navbar-fixed">
+    <header>
         <nav>
             <div class="nav-wrapper indigo">
-                <ul>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down">
                     <li><a href="{% url 'home' %}" class="left brand-logo amber-text accent-3">&nbsp;&nbsp;LGP...M</a></li>
                 </ul>
-                <ul class="right side-nave">
+                <ul class="right hide-on-med-and-down">
                     <li><a href="{% url 'about' %}" class="amber-text accent-3">About</a></li>
                     <!-- other links go here  -->
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'movies_index' %}" class="amber-text accent-3">Movies</a></li>
-                        <li><a href="{% url 'movies_create' %}" class="amber-text accent-3">Add Movies</a></li>
+                    <!-- <li><a href="{% url 'movies_index' %}" class="amber-text accent-3">Movies</a></li>
+                        <li><a href="{% url 'movies_create' %}" class="amber-text accent-3">Add Movies</a></li> -->
                         <li><a href="{% url 'index' %}" class="amber-text accent-3">My Tapes</a></li>
                         <li><a href="{% url 'tapes_create' %}" class="amber-text accent-3">Add Tape</a></li>
                         <li><a href="{% url 'logout' %}" class="amber-text accent-3">Log Out</a></li>
-                            <li>
-                                <form action="{% url 'search_media' %}" method="POST">
+                        <li>
+                        <form action="{% url 'search_media' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="search" placeholder="Search" name="searched">
                             </li>
                             <li><a href="{% url 'search_media' %}"><i class="material-icons amber-text accent-3">search</i></a></li> 
-                                </form>
-                            </li>
+                        </form>
+                        </li>
                     {% else %}
-                        <li><a href="{% url 'signup' %}" class="amber-text accent-3">Sign Up</a></li>
-                        <li><a href="{% url 'login' %}" class="amber-text accent-3">Log In</a></li>
+                    <li><a href="{% url 'signup' %}" class="amber-text accent-3">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}" class="amber-text accent-3">Log In</a></li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'index' %}">My Tapes</a></li>
+            <li><a href="{% url 'tapes_create' %}">Add Tape</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+        </ul>
+        
     </header>
     <main class="container">
         {% block content %}
         {% endblock %}
     </main>
-  	<footer class="page-footer indigo">
-       <div class="right amber-text accent-3">All Rights Reserved, &copy; 2023 Let's Get Physical Media &nbsp;</div>
+    <footer class="page-footer indigo">
+        <div class="right amber-text accent-3">All Rights Reserved, &copy; 2023 Let's Get Physical Media &nbsp;</div>
     </footer>
 </body>
 </html>
+
+
+<script>
+//      document.addEventListener('DOMContentLoaded', function() {
+//     var elems = document.querySelectorAll('.sidenav');
+//     var instances = M.Sidenav.init(elems, options);
+//   });
+
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+    // $(".button-collapse").sideNav();
+        
+</script>
