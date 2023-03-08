@@ -119,20 +119,6 @@ def search_media(request):
     return render(request, 'search_media.html', {})
 
 
-# def search_movies(request):
-#   if request.method == 'POST':
-#     searched = request.POST['searched']
-#     movies = Movie.objects.filter(title__contains=searched)
-#     # this works as the serach but we need to figure out how to generate a tap from it
-#    # return render(request, 'search_movies.html', {'searched': searched, 'movies': movies})
-#     # return redirect(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
-#     return render(request, 'main_app/tape_form.html', {'searched': searched, 'movies': movies})
-#   else:
-#     # return render(request, 'search_movies.htm', {})
-#     # return redirect(request, 'main_app/tape_form.html', {})
-#     return render(request, 'main_app/tape_form.html', {})
-
-
 def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
@@ -165,8 +151,20 @@ def search_movies(request):
 #     return render(request, 'main_app/tape_form.html', {})
   
 
-def assoc_tape(request, imdb_id):
-  pass 
+def assoc_tape(request):
+  if request.method == 'POST':
+    searched = request.POST['searched']
+    params = {'i': f'{searched}'}
+    response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+    imdb_response = response
+    print(imdb_response)
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'imdb_response': imdb_response})
+  else:
+    return render(request, 'main_app/tape_form.html', {})
+    
+    
+
+
   # movie = Movie.objects.get(id=movie_id)
   # tape = Tape(
   #   name = movie.title,
