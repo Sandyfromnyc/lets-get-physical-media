@@ -34,16 +34,16 @@
   {% if searched %}
   <div class="row">
     <h6>You Searched For {{ searched }}:</h6>
-    {% for x in all_movies %}
+    {% for x in search_response %}
     <div class="card col s3">
       <ul>
-        <a href="{% url 'assoc_tape' x.id %}">
-          <li>Title: {{ x.title }}</li>
-          <li>IMDB ID: {{ x.imdb_id }}</li>
+        <a href="{% url 'assoc_tape' x.imdbID%}"
+          <li>Title: {{ x.Title }}</li>
+          <li>IMDB ID: {{ x.imdbID }}</li>
           <hr>
           <li>imdbID: <a href="https://www.imdb.com/title/{{x.imdb_id}}">IMDB</a></li>
-          <li>Django: {{ x.id }}</li>
-        </a>
+          <!-- <li>Django: {{ x.id }}</li> -->
+        </a> 
       </ul>
     </div>
     {% endfor %}
