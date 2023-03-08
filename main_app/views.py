@@ -133,58 +133,51 @@ def search_media(request):
 #     return render(request, 'main_app/tape_form.html', {})
 
 
-# def movies(request):
-#   search = {"s": "Star Wars"}
-#   response=requests.get("http://www.omdbapi.com/?apikey=acd8ae1a&", params=search).json()
-#   return render(request, "movies.html", {"response":response})
-
-# def search_movies(request):
-#   if request.method == 'POST':
-#     searched = request.POST['searched']
-#     params = {'s': f'{searched}'}
-#     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
-#     search_response = response["Search"]
-#     print(search_response)
-#     return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
-#   else:
-#     return render(request, 'main_app/tape_form.html', {})
-  
-
-
-  
-
 def search_movies(request):
-  all_movies = {}
   if request.method == 'POST':
     searched = request.POST['searched']
     params = {'s': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
     search_response = response["Search"]
-    for i in search_response:
-      movie_data = Movie(
-        title = i['Title'],
-        imdb_id = i['imdbID'],
-      )
-      movie_data.save()
-      all_movies = Movie.objects.all().order_by('-id')
-
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response, 'all_movies': all_movies })
+    return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
   else:
     return render(request, 'main_app/tape_form.html', {})
   
 
-def assoc_tape(request, movie_id):
-  movie = Movie.objects.get(id=movie_id)
-  tape = Tape(
-    name = movie.title,
-    quantity= 1,
-    movie = movie,
-    user = request.user 
-  )
-  tape.save()
-  tape_id = tape.id
-  print(tape_id)
-  return redirect('detail', tape_id=tape_id)
+#def search_movies(request):
+
+#   all_movies = {}
+#   if request.method == 'POST':
+#     searched = request.POST['searched']
+#     params = {'s': f'{searched}'}
+#     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+#     search_response = response["Search"]
+#     for i in search_response:
+#       movie_data = Movie(
+#         title = i['Title'],
+#         imdb_id = i['imdbID'],
+#       )
+#       movie_data.save()
+#       all_movies = Movie.objects.all().order_by('-id')
+
+#     return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response, 'all_movies': all_movies })
+#   else:
+#     return render(request, 'main_app/tape_form.html', {})
+  
+
+def assoc_tape(request, imdb_id):
+  pass 
+  # movie = Movie.objects.get(id=movie_id)
+  # tape = Tape(
+  #   name = movie.title,
+  #   quantity= 1,
+  #   movie = movie,
+  #   user = request.user 
+  # )
+  # tape.save()
+  # tape_id = tape.id
+  # print(tape_id)
+  # return redirect('detail', tape_id=tape_id)
   # return redirect('tapes_update', tape_id=tape_id)
   # return render(request, 'main_app/assoc_tape.html', { 'movie_id': movie_id, 'tape': tape, 'tape_id': tape_id })
   #
