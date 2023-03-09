@@ -22,3 +22,7 @@ p {
 .tapes {
   padding: 3px;
 }
+
+#welcome {
+  font-family: 'itc-machine-std-medium', sans-serif !important;
+}
