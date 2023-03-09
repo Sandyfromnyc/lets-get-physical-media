@@ -2,7 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-color: rgba(240, 221, 95, 0.5) !important;
+  background-color: rgba(255, 162, 67, 0.3) !important;
 
 }
   
@@ -18,4 +18,8 @@ footer.page-footer {
 
 p {
   margin-left: 10px;;
+}
+
+.tapes {
+  padding: 3px;
 }

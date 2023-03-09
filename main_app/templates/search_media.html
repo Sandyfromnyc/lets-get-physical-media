@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if searched %}
-    <h1>You Searched For {{ searched }}</h1>
+    <h1 class="center indigo-text">You Searched For {{ searched }}</h1>
     <br>
 <div class="row">
 {% for movie in movies %}
@@ -36,7 +36,7 @@
   </div>
 {% else %}
 
-  <h1>You need to search first!</h1>
+  <h1 class="center indigo-text">You need to search first!</h1>
 
 {% endif %}
 {% endblock %}
