@@ -36,15 +36,14 @@
   <h6>You Searched For {{ searched }}:</h6>
   {% for x in search_response %}
   <form action="{% url 'assoc_tape' %}" method="POST">
-    <div class="card col s3">
-      <ul>
-        <li>Title: {{ x.Title }}</li>
-        <li>IMDB ID: {{ x.imdbID }}</li>
-      </ul>
+      <button class="col s6">
+        <ul>
+          <li>Title: {{ x.Title }}</li>
+          <li>IMDB ID: {{ x.imdbID }}</li>
+        </ul>
       {% csrf_token %}
-      <input type="search" class="browser-default" placeholder="{{ x.imdbID }}" name="searched" default="{{ x.imdbID }}">
-      <button class="btn-small indigo amber-text accent-4">Search</button>
-    </div>
+         <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
+      </button>
   </form>
     {% endfor %}
   </div>
@@ -66,14 +65,4 @@
 </form>
 {% endif %}
 {% endif %}
-<div class="row">
-<div class="card col s6">
-    <ul>
-      <li>Title: {{ imdb_response.Title }}</li>
-      <li>IMDB ID: {{ imdb_response.imdbID }}</li>
-      <li>Director: {{ imdb_response.Director }}</li>
-    </ul>
-  </div>
-</div>
-
 {% endblock %}
