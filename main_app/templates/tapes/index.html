@@ -6,7 +6,8 @@
 <div class="row">
   {% for tape in tapes %} 
     <a href="{% url 'detail' tape.id %}">
-      <div class="card col s6 indigo amber-text tapes">
+      <div class="col s4 m4">
+      <div class="card stack indigo amber-text tapes">
         <div class="card-content">
           <div class="row">
             <img class="responsive-img small" src="{{ tape.movie.poster }}" alt="">
@@ -20,6 +21,7 @@
         </div>
       </div>
     </a>
+  </div>
   {% endfor %}
 </div>      
 {% endblock %}
