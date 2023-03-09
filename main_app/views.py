@@ -63,7 +63,7 @@ def tapes_detail(request, tape_id):
 
 class TapeUpdate(LoginRequiredMixin, UpdateView):
   model = Tape
-  fields = ['name', 'quantity', 'quality']
+  fields = ['name', 'quantity', 'quality', 'description']
 
 
 class TapeDelete(LoginRequiredMixin, DeleteView):
