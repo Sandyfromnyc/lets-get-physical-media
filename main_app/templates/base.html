@@ -18,9 +18,9 @@
         <nav>
             <div class="nav-wrapper indigo">
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul class="left hide-on-med-and-down">
-                    <li><a href="{% url 'home' %}" class="left brand-logo amber-text accent-3">&nbsp;&nbsp;LGP...M</a></li>
-                </ul>
+                <!-- <ul class="left hide-on-med-and-down"> -->
+                    <a href="{% url 'home' %}"><img class="img-responsive" style="width: 114px;" src="https://i.imgur.com/Ql5inA8t.jpg" alt="Image"/></a>
+                <!-- </ul> -->
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{% url 'about' %}" class="amber-text accent-3">About</a></li>
                     <!-- other links go here  -->
@@ -58,7 +58,7 @@
         {% endblock %}
     </main>
     <footer class="page-footer indigo">
-        <div class="right amber-text accent-3">All Rights Reserved, &copy; 2023 Let's Get Physical Media &nbsp;</div>
+        <div class="center amber-text accent-3">All Rights Reserved, &copy; 2023 Let's Get Physical Media &nbsp;</div>
     </footer>
 </body>
 </html>
