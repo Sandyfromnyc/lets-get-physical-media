@@ -155,12 +155,24 @@ def assoc_tape(request):
   if request.method == 'POST':
     searched = request.POST['searched']
     params = {'i': f'{searched}'}
-    response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
-    imdb_response = response
-    print(imdb_response)
-    return render(request, 'main_app/tape_form.html', {'searched': searched, 'imdb_response': imdb_response})
+    imdb_response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+    movie = Movie(
+      title = imdb_response['Title'],
+      imdb_id = imdb_response['imdbID'],
+    )
+    movie.save()
+    tape = Tape(
+      name = movie.title,
+      quantity= 1,
+      movie = movie,
+      user = request.user 
+    )
+    tape.save()
+    tape_id = tape.id
+
+    return redirect('detail', tape_id=tape_id)
   else:
-    return render(request, 'main_app/tape_form.html', {})
+    return redirect(request, 'main_app/tape_form.html', {})
     
     
 
