@@ -49,7 +49,7 @@ def tapes_index(request):
 
 class TapeCreate(LoginRequiredMixin, CreateView):
   model = Tape
-  fields = ['name', 'quantity', 'quality']
+  fields = ['name', 'quantity', 'quality', 'description', 'format',]
 
   def form_valid(self, form):
     form.instance.user = self.request.user 
@@ -63,7 +63,7 @@ def tapes_detail(request, tape_id):
 
 class TapeUpdate(LoginRequiredMixin, UpdateView):
   model = Tape
-  fields = ['quantity', 'quality']
+  fields = ['name', 'quantity', 'quality', 'description']
 
 
 class TapeDelete(LoginRequiredMixin, DeleteView):
@@ -115,26 +115,44 @@ def search_media(request):
   else:
     return render(request, 'search_media.html', {})
 
-
+@login_required
 def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
     params = {'s': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
     search_response = response["Search"]
+    
     return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
   else:
     return render(request, 'main_app/tape_form.html', {})
   
-
+@login_required
 def assoc_tape(request):
   if request.method == 'POST':
     searched = request.POST['searched']
     params = {'i': f'{searched}'}
     imdb_response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+    print(imdb_response)
     movie = Movie(
       title = imdb_response['Title'],
       imdb_id = imdb_response['imdbID'],
+      year = imdb_response['Year'],
+      released = imdb_response['Released'],
+      rated = imdb_response['Rated'],
+      runtime = imdb_response['Runtime'],
+      genre = imdb_response['Genre'],
+      director = imdb_response['Director'],
+      writer = imdb_response['Writer'],
+      actors = imdb_response['Actors'],
+      plot = imdb_response['Plot'],
+      type_media = imdb_response['Type'],
+      poster = imdb_response['Poster'],
+      awards = imdb_response['Awards'],
+      country = imdb_response['Country'],
+      language = imdb_response['Language'],
+      imdb_rating = imdb_response['imdbRating'],
+      box_office = imdb_response['BoxOffice'],
     )
     movie.save()
     tape = Tape(

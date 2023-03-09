@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="center">{{ tape.name }}'s Details</h1>
+<h1 class="center indigo-text">{{ tape.movie.title }}'s Details</h1>
 
 <div class="row">
   <div class="col s6">
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ tape.name }}</span>
+        <p> {{ tape.movie.year }}</p>
         <p>Quantity: {{ tape.quantity }}</p>
         <p>Quality: {{ tape.quality }}</p>
+        <p>Directed by: {{ tape.movie.director }}</p>
+        <p>Written by: {{ tape.movie.writer }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'tapes_update' tape.id %}">Edit</a>
@@ -17,8 +20,39 @@
       </div>
     </div>
   </div>
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <img class="responsive-img" src="{{ tape.movie.poster }}" alt="">
+      </div>
+    </div>
+  </div>
 </div>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <p> {{ tape.movie.plot }}</p>
+        <hr>
+        <p> {{ tape.move.actors }}</p>
+
+      </div>
+    </div>
+  </div>
+    <div class="col s6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ tape.user.name }}'s Thoughts</span>
+          <hr>
+          <p> {{ tape.description }}</p>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </div>
+
 
 
 
