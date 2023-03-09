@@ -49,7 +49,7 @@ def tapes_index(request):
 
 class TapeCreate(LoginRequiredMixin, CreateView):
   model = Tape
-  fields = ['name', 'quantity', 'quality']
+  fields = ['name', 'quantity', 'quality', 'description', 'format',]
 
   def form_valid(self, form):
     form.instance.user = self.request.user 
@@ -115,7 +115,7 @@ def search_media(request):
   else:
     return render(request, 'search_media.html', {})
 
-
+@login_required
 def search_movies(request):
   if request.method == 'POST':
     searched = request.POST['searched']
@@ -127,7 +127,7 @@ def search_movies(request):
   else:
     return render(request, 'main_app/tape_form.html', {})
   
-
+@login_required
 def assoc_tape(request):
   if request.method == 'POST':
     searched = request.POST['searched']
