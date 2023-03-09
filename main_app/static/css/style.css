@@ -2,10 +2,13 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: rgba(240, 221, 95, 0.5) !important;
+
 }
   
 main {
   flex: 1 0 auto;
+  
 }
   
 footer.page-footer {

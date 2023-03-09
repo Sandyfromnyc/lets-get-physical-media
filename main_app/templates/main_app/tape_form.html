@@ -16,7 +16,7 @@
 {% else %}
   <!-- above is editing a existing tape  -->
 
-<h1 class="center">Add A Tape to the Shelf</h1>
+<h1 class="center">Search Movie Title</h1>
 <br>
 <!-- here's the search -->
 
@@ -33,36 +33,25 @@
 <!-- above is the search  -->
 {% if searched %}
 <div class="row">
-  <h6>You Searched For {{ searched }}:</h6>
-  {% for x in search_response %}
-  <form action="{% url 'assoc_tape' %}" method="POST">
-      <button class="col s6 indigo amber-text accent-4">
-        <ul>
-          <li>Title: {{ x.Title }}</li>
-          <li>IMDB ID: {{ x.imdbID }}</li>
-        </ul>
-      {% csrf_token %}
-         <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
-      </button>
-  </form>
+    {% for x in search_response %}
+    <div class="col s6">
+      <div class="card indigo">
+        <form action="{% url 'assoc_tape' %}" method="POST">
+          <div class="card-content">
+            <h4 class="center indigo amber-text">{{ x.Title }}</h4>
+              <h6 class="center indigo amber-text">{{ x.Year }}</h6>
+                <img class="responsive-img" src="{{ x.Poster }}" alt="Poster">
+                {% csrf_token %}
+                <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
+                <button class="indigo amber-text accent-4">Select</button>
+          </div>
+        </div>
+      </div>  
+      </form>
     {% endfor %}
-  </div>
-
-      <br>
-    </ul> 
-  {% else %} 
-
 </div>
 
-
-<!-- Above here is the Movie objects  -->
-<form action="" method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Submit" class="btn indigo amber-text accent-4">
-</form>
+  {% else %} 
 {% endif %}
 {% endif %}
 {% endblock %}
