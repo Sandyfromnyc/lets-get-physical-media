@@ -14,7 +14,7 @@
         <p>Directed by: {{ tape.movie.director }}</p>
         <p>Written by: {{ tape.movie.writer }}</p>
       </div>
-      <div class="card-action">
+      <div class="card-action indigo">
         <a href="{% url 'tapes_update' tape.id %}">Edit</a>
         <a href="{% url 'tapes_delete' tape.id %}">Delete</a>
       </div>
@@ -42,7 +42,7 @@
     <div class="col s6">
       <div class="card">
         <div class="card-content">
-          <span class="card-title">{{ tape.user.name }}'s Thoughts</span>
+          <span class="card-title">{{ tape.user.username }}'s Thoughts</span>
           <hr>
           <p> {{ tape.description }}</p>
   

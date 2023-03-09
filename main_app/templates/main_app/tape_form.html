@@ -25,7 +25,7 @@
   <div class="row">
     <button class="btn-small indigo amber-text accent-4">Search</button>
     {% csrf_token %}
-    <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched">
+    <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched" value="">
   </div>
 </div>
 </form>
@@ -43,7 +43,7 @@
                 <img class="responsive-img" src="{{ x.Poster }}" alt="Poster">
                 {% csrf_token %}
                 <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
-                <button class="indigo amber-text accent-4">Select</button>
+                <button class="btn red white-text lighten-1"><i>add</i></button>
           </div>
         </div>
       </div>  
