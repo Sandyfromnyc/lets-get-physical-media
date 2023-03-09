@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="center">{{ tape.name }}'s Details</h1>
+<h1 class="center">{{ tape.movie.title }}'s Details</h1>
 
 <div class="row">
   <div class="col s6">
@@ -34,7 +34,7 @@
       <div class="card-content">
         <p> {{ tape.movie.plot }}</p>
         <hr>
-        <p> {{ tape.movie.actors }}</p>
+        <p> {{ tape.move.actors }}</p>
 
       </div>
     </div>

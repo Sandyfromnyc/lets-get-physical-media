@@ -4,21 +4,19 @@
 <h1 class="center">VHS Shelves</h1>
 
 <div class="row">
-{% for tape in tapes %} 
-  <div class="col s6">
+  {% for tape in tapes %} 
     <a href="{% url 'detail' tape.id %}">
-      <div class="card">
+      <div class="card col s6">
         <div class="card-content">
           <span class="card-title center">{{ tape.name }}</span>
+          <p class="center">{{ tape.movie.year }}</p>
+          <hr>
+          <p>Director: {{ tape.movie.director }}</p>
           <p>Quantity: {{ tape.quantity }}</p>
           <p>Quality: {{ tape.quality }}</p>
-          {% for movie in tape.movies.all %}
-          <p>Director: {{ movie.director }}</p>
-          {% endfor %}
         </div>
       </div>
     </a>
-  </div>
   {% endfor %}
 </div>      
 {% endblock %}
