@@ -36,7 +36,7 @@
   <h6>You Searched For {{ searched }}:</h6>
   {% for x in search_response %}
   <form action="{% url 'assoc_tape' %}" method="POST">
-      <button class="col s6">
+      <button class="col s6 indigo amber-text accent-4">
         <ul>
           <li>Title: {{ x.Title }}</li>
           <li>IMDB ID: {{ x.imdbID }}</li>
