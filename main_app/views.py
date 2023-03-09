@@ -137,6 +137,22 @@ def assoc_tape(request):
     movie = Movie(
       title = imdb_response['Title'],
       imdb_id = imdb_response['imdbID'],
+      year = imdb_response['Year'],
+      released = imdb_response['Released'],
+      rated = imdb_response['Rated'],
+      runtime = imdb_response['Runtime'],
+      genre = imdb_response['Genre'],
+      director = imdb_response['Director'],
+      writer = imdb_response['Writer'],
+      actors = imdb_response['Actors'],
+      plot = imdb_response['Plot'],
+      type_media = imdb_response['Type'],
+      poster = imdb_response['Poster'],
+      awards = imdb_response['Awards'],
+      country = imdb_response['Country'],
+      language = imdb_response['Language'],
+      imdb_rating = imdb_response['imdbRating'],
+      box_office = imdb_response['BoxOffice'],
     )
     movie.save()
     tape = Tape(
