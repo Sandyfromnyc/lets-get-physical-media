@@ -122,7 +122,7 @@ def search_movies(request):
     params = {'s': f'{searched}'}
     response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
     search_response = response["Search"]
-    print(search_response)
+    
     return render(request, 'main_app/tape_form.html', {'searched': searched, 'search_response': search_response})
   else:
     return render(request, 'main_app/tape_form.html', {})
@@ -133,6 +133,7 @@ def assoc_tape(request):
     searched = request.POST['searched']
     params = {'i': f'{searched}'}
     imdb_response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+    print(imdb_response)
     movie = Movie(
       title = imdb_response['Title'],
       imdb_id = imdb_response['imdbID'],
