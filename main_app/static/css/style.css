@@ -1,3 +1,7 @@
+* {
+  font-family: 'Bungee', cursive;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -24,5 +28,5 @@ p {
 }
 
 #welcome {
-  font-family: 'itc-machine-std-medium', sans-serif !important;
+  font-family: 'Bungee', cursive;
 }
