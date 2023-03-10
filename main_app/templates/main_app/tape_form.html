@@ -35,18 +35,16 @@
 <div class="row">
     {% for x in search_response %}
     <div class="col s6 m4">
-      <div class="card indigo">
+      <div class="card indigo" style="height:450px">
         <form action="{% url 'assoc_tape' %}" method="POST">
           <div class="card-content">
-            <h4 class="center indigo amber-text">{{ x.Title }}</h4>
-              <h6 class="center indigo amber-text">{{ x.Year }}</h6>
-              <div class="center">
-                <img class="responsive-img" src="{{ x.Poster }}" alt="Poster">
-              </div>
+            <img class="responsive-img" src="{{ x.Poster }}" alt="Poster">
+            <h6 class="center indigo amber-text">{{ x.Title }}</h6>
+              <p class="center indigo amber-text">{{ x.Year }}</p>
                 {% csrf_token %}
                 <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
                 <div class="center">
-                <button class="btn red white-text lighten-1 center"><i>add</i></button>
+                <button class="btn-small red white-text lighten-1 center"><i>add</i></button>
                 </div>
           </div>
         </div>
