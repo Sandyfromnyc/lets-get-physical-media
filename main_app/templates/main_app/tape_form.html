@@ -4,7 +4,7 @@
 
 {% if object %}
 <!-- below is editing a existing tape  -->
-  <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+  <h1 class="indigo-text">Edit {{ object.name }}</h1>
   <form action="" method="POST">
     {% csrf_token %}
     <table>
