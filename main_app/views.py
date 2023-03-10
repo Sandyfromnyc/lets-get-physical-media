@@ -134,38 +134,52 @@ def search_movies(request):
 def assoc_tape(request):
   if request.method == 'POST':
     searched = request.POST['searched']
-    params = {'i': f'{searched}'}
-    imdb_response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
-    print(imdb_response)
-    movie = Movie(
-      title = imdb_response['Title'],
-      imdb_id = imdb_response['imdbID'],
-      year = imdb_response['Year'],
-      released = imdb_response['Released'],
-      rated = imdb_response['Rated'],
-      runtime = imdb_response['Runtime'],
-      genre = imdb_response['Genre'],
-      director = imdb_response['Director'],
-      writer = imdb_response['Writer'],
-      actors = imdb_response['Actors'],
-      plot = imdb_response['Plot'],
-      type_media = imdb_response['Type'],
-      poster = imdb_response['Poster'],
-      awards = imdb_response['Awards'],
-      country = imdb_response['Country'],
-      language = imdb_response['Language'],
-      imdb_rating = imdb_response['imdbRating'],
-      box_office = imdb_response['BoxOffice'],
-    )
-    movie.save()
-    tape = Tape(
-      name = movie.title,
-      quantity= 1,
-      movie = movie,
-      user = request.user 
-    )
-    tape.save()
-    tape_id = tape.id
+    try:
+      my_object = Movie.objects.get(imdb_id=searched)
+    except Movie.DoesNotExist:
+      my_object = None
+    if my_object:
+      tape = Tape(
+        name = my_object.title,
+        quantity= 1,
+        movie = my_object,
+        user = request.user 
+      )
+      tape.save()
+      tape_id = tape.id
+    else: 
+      params = {'i': f'{searched}'}
+      imdb_response=requests.get('http://www.omdbapi.com/?apikey=acd8ae1a&', params=params).json()
+      print(imdb_response)
+      movie = Movie(
+        title = imdb_response['Title'],
+        imdb_id = imdb_response['imdbID'],
+        year = imdb_response['Year'],
+        released = imdb_response['Released'],
+        rated = imdb_response['Rated'],
+        runtime = imdb_response['Runtime'],
+        genre = imdb_response['Genre'],
+        director = imdb_response['Director'],
+        writer = imdb_response['Writer'],
+        actors = imdb_response['Actors'],
+        plot = imdb_response['Plot'],
+        type_media = imdb_response['Type'],
+        poster = imdb_response['Poster'],
+        awards = imdb_response['Awards'],
+        country = imdb_response['Country'],
+        language = imdb_response['Language'],
+        imdb_rating = imdb_response['imdbRating'],
+        box_office = imdb_response['BoxOffice'],
+      )
+      movie.save()
+      tape = Tape(
+        name = movie.title,
+        quantity= 1,
+        movie = movie,
+        user = request.user 
+      )
+      tape.save()
+      tape_id = tape.id
 
     return redirect('detail', tape_id=tape_id)
   else:

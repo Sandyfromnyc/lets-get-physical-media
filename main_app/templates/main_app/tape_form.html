@@ -4,7 +4,7 @@
 
 {% if object %}
 <!-- below is editing a existing tape  -->
-  <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+  <h1 class="indigo-text">Edit {{ object.name }}</h1>
   <form action="" method="POST">
     {% csrf_token %}
     <table>
@@ -34,22 +34,27 @@
 {% if searched %}
 <div class="row">
     {% for x in search_response %}
-    <div class="col s6">
+    <div class="col s6 m4">
       <div class="card indigo">
         <form action="{% url 'assoc_tape' %}" method="POST">
           <div class="card-content">
             <h4 class="center indigo amber-text">{{ x.Title }}</h4>
               <h6 class="center indigo amber-text">{{ x.Year }}</h6>
+              <div class="center">
                 <img class="responsive-img" src="{{ x.Poster }}" alt="Poster">
+              </div>
                 {% csrf_token %}
                 <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
-                <button class="btn red white-text lighten-1"><i>add</i></button>
+                <div class="center">
+                <button class="btn red white-text lighten-1 center"><i>add</i></button>
+                </div>
           </div>
         </div>
       </div>  
       </form>
     {% endfor %}
 </div>
+
 
   {% else %} 
 {% endif %}
