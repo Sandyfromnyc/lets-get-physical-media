@@ -5,15 +5,18 @@
 
 <div class="row">
   {% for tape in tapes %}
-  <a href="{% url 'detail' tape.id %}">
     <div class="col s12 m6">
       <div class="card indigo amber-text" style="height:650px">
         <div class="card-image">
+          <a href="{% url 'detail' tape.id %}">
           <img class="poster-card" src="{{ tape.movie.poster }}" alt="{{ tape.name }}">
+          </a>
+
         </div>
         <div class="card-content indigo amber-text center-align">
           <span class="card-title activator amber-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">more_vert</i></span>
         </div>
+      
         <div class="card-reveal">
           <span class="card-title indigo-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">close</i></span>
           <ul class="indigo-text">
@@ -28,11 +31,12 @@
             <a href="https://www.imdb.com/title/{{ tape.movie.imdb_id }}/">
               <li>IMDB Rating: {{ tape.movie.imdb_rating }}</li>
             </a>
+            <hr>
+            <li><a href="{% url 'detail' tape.id %}"> Tape Details<a></li>
           </ul>
         </div>
       </div>
     </div>
-  </a>
   {% endfor %}
 </div>
 
