@@ -5,33 +5,43 @@
 {% if searched %}
     <h1 class="center indigo-text">You Searched For {{ searched }}</h1>
     <br>
-<div class="row">
-{% for movie in movies %}
-    <div class="col s6">
-        <a href="{% url 'movies_detail' movie.id %}" text-decoration="none">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">{{ movie.title }}</span>
-                    <p>Director: {{ movie.director }}</p>
-                </div>
-            </div>
-        </a>  
- </div>
-{% endfor%}
-</div>
+
+
 <div class="row">
 {% for tape in tapes %}
-      <a href="{% url 'detail' tape.id %}" text-decoration="none">
-          <div class="col s6">
-              <div class="card">
-                  <div class="card-content">
-                      <span class="card-title">VHS: {{ tape.name }}</span>
-                      <p>Quantity: {{ tape.quantity }}</p>
-                      <p>Quality: {{ tape.quality }}</p>
-                  </div>
-              </div>
+<div class="row">
+    {% for tape in tapes %}
+    <a href="{% url 'detail' tape.id %}"></a> 
+      <div class="col s12 m6">
+        <div class="card indigo amber-text" style="height:650px">
+          <div class="card-image">
+            <img src="{{ tape.movie.poster }}" alt="{{ tape.name }}">
           </div>
-      </a>
+          <div class="card-content indigo amber-text center-align">
+            <span class="card-title activator amber-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">more_vert</i></span>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title indigo-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">close</i></span>
+            <ul class="indigo-text">
+              <li>Directed by: {{ tape.movie.director }}</li>
+              <li>Written by: {{ tape.movie.writer }}</li>
+              <hr>
+              <li> {{ tape.movie.plot }}</li>
+              <hr>
+              <li>Cast: {{ tape.movie.actors }}</li>
+              <hr>
+              <li>Awards: {{ tape.movie.awards }}</li>
+              <a href="https://www.imdb.com/title/{{ tape.movie.imdb_id }}/">
+                <li>IMDB Rating: {{ tape.movie.imdb_rating }}</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  
 {% endfor %}
   </div>
 {% else %}
