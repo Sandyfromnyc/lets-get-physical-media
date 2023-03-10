@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
 # Create your models here.
 class Movie(models.Model):
   title = models.CharField(max_length=100)
@@ -39,3 +40,12 @@ class Tape(models.Model):
   
   def get_absolute_url(self):
     return reverse('detail', kwargs={'tape_id': self.id})
+
+class Collector(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  first_name = models.CharField(max_length=50)
+  last_name = models.CharField(max_length=100)
+  email = models.CharField(max_length=100)
+  bio = models.CharField(max_length=300)
+  birthday = models.DateField()
+

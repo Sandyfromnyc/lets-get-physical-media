@@ -7,6 +7,8 @@ from .models import Tape, Movie, User
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 import requests
+from django.conf import settings
+from django.db.models.signals import post_save
 
 # Create your views here.
 
