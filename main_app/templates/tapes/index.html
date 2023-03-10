@@ -5,11 +5,11 @@
 
 <div class="row">
   {% for tape in tapes %}
-  <a href="{% url 'detail' tape.id %}"></a> 
+  <a href="{% url 'detail' tape.id %}">
     <div class="col s12 m6">
       <div class="card indigo amber-text" style="height:650px">
         <div class="card-image">
-          <img src="{{ tape.movie.poster }}" alt="{{ tape.name }}">
+          <img class="poster-card" src="{{ tape.movie.poster }}" alt="{{ tape.name }}">
         </div>
         <div class="card-content indigo amber-text center-align">
           <span class="card-title activator amber-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">more_vert</i></span>
