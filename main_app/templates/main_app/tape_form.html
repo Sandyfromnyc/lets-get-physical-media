@@ -22,7 +22,7 @@
 
 
 <form action="{% url 'search_movies' %}" method="POST">
-  <div class="row">
+  <div class="row center">
     <button class="btn-small indigo amber-text accent-4">Search</button>
     {% csrf_token %}
     <input type="search" class="browser-default" placeholder="Search for a movie..." name="searched" value="">
@@ -32,27 +32,6 @@
 
 <!-- above is the search  -->
 {% if searched %}
-<!-- <div class="row">
-    {% for x in search_response %}
-    <div class="col s6 m4">
-      <div class="card indigo" style="height:450px">
-        <form action="{% url 'assoc_tape' %}" method="POST">
-          <div class="card-content">
-            <img class="responsive-img" src="{{ x.Poster }}" alt="Poster">
-            <h6 class="center indigo amber-text">{{ x.Title }}</h6>
-              <p class="center indigo amber-text">{{ x.Year }}</p>
-                {% csrf_token %}
-                <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
-                <div class="center">
-                <button class="btn-small red white-text lighten-1 center"><i>add</i></button>
-                </div>
-          </div>
-        </div>
-      </div>  
-      </form>
-    {% endfor %}
-</div> -->
-
 
 <div class="row">
   {% for x in search_response %}
@@ -73,20 +52,6 @@
   </div>
   {% endfor %}
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   {% else %} 
