@@ -8,16 +8,16 @@ As the world continues to move towards streaming and digital movies, collecting 
 
 ## Screenshots
 Welcome Page:
-![Welcom](https://imgur.com/u9iLaRd "Welcom")
+![Welcom](https://i.imgur.com/u9iLaRd.png "Welcom")
 
 About Page:
-![About](https://imgur.com/VU9Tzmq "Detail")
+![About](https://imgur.com/VU9Tzmq.png "Detail")
 
 Search for movies to add to your digital "shelf":
-![Add](https://imgur.com/EuqaCrt "Add")
+![Add](https://imgur.com/EuqaCrt.png "Add")
 
 View your shelf and click on a movie to reveal its details:
-![Shelf](https://imgur.com/AB61QVd "Shelf")
+![Shelf](https://imgur.com/AB61QVd.png "Shelf")
 
 ## Technologies Used
 - Python
