@@ -53,6 +53,15 @@
             <li><a href="{% url 'index' %}">My Tapes</a></li>
             <li><a href="{% url 'tapes_create' %}">Add Tape</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li>
+                <form action="{% url 'search_media' %}" method="POST">
+                {% csrf_token %}
+                <input type="search" placeholder="Search" name="searched">
+            </li>
+            <li>
+                <a href="{% url 'search_media' %}"><i class="material-icons amber-text accent-3">search</i></a></li> 
+                </form>
+            </li>
         </ul>
         
     </header>
@@ -68,15 +77,7 @@
 
 
 <script>
-//      document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('.sidenav');
-//     var instances = M.Sidenav.init(elems, options);
-//   });
-
 $(document).ready(function(){
     $('.sidenav').sidenav();
   });
-
-    // $(".button-collapse").sideNav();
-        
 </script>

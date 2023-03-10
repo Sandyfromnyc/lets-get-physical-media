@@ -57,9 +57,9 @@
 <div class="row">
   {% for x in search_response %}
   <div class="col s12 m6">
-    <div class="card center indigo amber-text" style="height:600px">
+    <div class="card center indigo amber-text" style="height:auto">
       <div class="card-image">
-        <img src="{{ x.Poster }}">
+        <img class="poster-card" src="{{ x.Poster }}">
           <form action="{% url 'assoc_tape' %}" method="POST">
          {% csrf_token %}
           <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
