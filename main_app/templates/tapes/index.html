@@ -4,24 +4,41 @@
 <h1 class="center indigo-text">VHS Shelves</h1>
 
 <div class="row">
-  {% for tape in tapes %} 
-    <a href="{% url 'detail' tape.id %}">
-      <div class="col s4 m4">
-      <div class="card stack indigo amber-text tapes" style="height:650px">
-        <div class="card-content">
-          <div class="row">
-            <img class="responsive-img small" src="{{ tape.movie.poster }}" alt="">
-            <span class="card-title center">{{ tape.name }}</span>
-            <p class="center">{{ tape.movie.year }}</p>
-          </div>
-          <hr>
-          <p>Director: {{ tape.movie.director }}</p>
-          <p>Quantity: {{ tape.quantity }}</p>
-          <p>Quality: {{ tape.quality }}</p>
+  {% for tape in tapes %}
+  <a href="{% url 'detail' tape.id %}"></a> 
+    <div class="col s12 m6">
+      <div class="card indigo amber-text" style="height:650px">
+        <div class="card-image">
+          <img src="{{ tape.movie.poster }}" alt="{{ tape.name }}">
+        </div>
+        <div class="card-content indigo amber-text center-align">
+          <span class="card-title activator amber-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">more_vert</i></span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title indigo-text">{{ tape.name }} {{ tape.movie.year }}<i class="material-icons right">close</i></span>
+          <ul class="indigo-text">
+            <li>Directed by: {{ tape.movie.director }}</li>
+            <li>Written by: {{ tape.movie.writer }}</li>
+            <hr>
+            <li> {{ tape.movie.plot }}</li>
+            <hr>
+            <li>Cast: {{ tape.movie.actors }}</li>
+            <hr>
+            <li>Awards: {{ tape.movie.awards }}</li>
+            <a href="https://www.imdb.com/title/{{ tape.movie.imdb_id }}/">
+              <li>IMDB Rating: {{ tape.movie.imdb_rating }}</li>
+            </a>
+          </ul>
         </div>
       </div>
-    </a>
-  </div>
+    </div>
+  </a>
   {% endfor %}
-</div>      
+</div>
+
+
+
+
+
+
 {% endblock %}

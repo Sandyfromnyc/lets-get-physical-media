@@ -32,7 +32,7 @@
 
 <!-- above is the search  -->
 {% if searched %}
-<div class="row">
+<!-- <div class="row">
     {% for x in search_response %}
     <div class="col s6 m4">
       <div class="card indigo" style="height:450px">
@@ -51,10 +51,49 @@
       </div>  
       </form>
     {% endfor %}
+</div> -->
+
+
+<div class="row">
+  {% for x in search_response %}
+  <div class="col s12 m6">
+    <div class="card center indigo amber-text" style="height:600px">
+      <div class="card-image">
+        <img src="{{ x.Poster }}">
+          <form action="{% url 'assoc_tape' %}" method="POST">
+         {% csrf_token %}
+          <input type="hidden" class="browser-default" name="searched" value="{{ x.imdbID }}">
+          <button class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></button>
+        </form>
+        </div>
+      <div class="card-content">
+        <p>{{ x.Title }} {{ x.Year }} </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   {% else %} 
 {% endif %}
 {% endif %}
+
+
+
+
 {% endblock %}
