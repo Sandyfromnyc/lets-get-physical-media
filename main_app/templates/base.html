@@ -50,18 +50,23 @@
         </nav>
         <ul class="sidenav" id="mobile-demo">
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'index' %}">My Tapes</a></li>
-            <li><a href="{% url 'tapes_create' %}">Add Tape</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
-            <li>
-                <form action="{% url 'search_media' %}" method="POST">
-                {% csrf_token %}
-                <input type="search" placeholder="Search" name="searched">
-            </li>
-            <li>
-                <a href="{% url 'search_media' %}"><i class="material-icons amber-text accent-3">search</i></a></li> 
-                </form>
-            </li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'index' %}">My Tapes</a></li>
+                <li><a href="{% url 'tapes_create' %}">Add Tape</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                <li>
+                    <form action="{% url 'search_media' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="search" placeholder="Search" name="searched">
+                </li>
+                <li>
+                    <a href="{% url 'search_media' %}"><i class="material-icons amber-text accent-3">search</i></a></li> 
+                    </form>
+                </li>
+            {{% else %}}
+            <li><a href="{% url 'signup' %}" class="amber-text accent-3">Sign Up</a></li>
+            <li><a href="{% url 'login' %}" class="amber-text accent-3">Log In</a></li>
+            {% endif %}
         </ul>
         
     </header>
